@@ -86,7 +86,7 @@ export default{
                 'valor': this.valor,
                 'descricao': this.descricao,
                 'situacao': this.situacao.value,
-                'categoria': this.cetegoria.value,
+                'categoria': this.categoria.value,
                 'tipo_transacao': this.tipo.value,
                 'date': this.date,
             }).then((response)=>{
@@ -97,12 +97,11 @@ export default{
             });
         },
         editar(){
-            console.log("editar");
             consult.put("transacao/" + this.codigo, {
                 'valor': this.valor,
                 'descricao': this.descricao,
                 'situacao': this.situacao.value,
-                'categoria': this.cetegoria.value,
+                'categoria': this.categoria.value,
                 'tipo_transacao': this.tipo.value,
                 'date': this.date,
             }).then((response)=>{
@@ -131,7 +130,7 @@ export default{
                 const itens = response.data;
 
                 for (let item of itens) {
-                    if(this.showEditar && item.codigo === this.codigo) this.cetegoria.value = this.codigo;
+                    if(this.showEditar && item.codigo === this.codigo) this.categoria.value = this.codigo;
                     this.categoria.options.push({value: item.codigo, text: item.descricao});
                 }
 
