@@ -4,10 +4,10 @@
             <summary>{{this.transacao.descricao}}</summary>
             <br>
             <p>
-                Codigo: {{this.transacao.codigo}}
+                Código: {{this.transacao.codigo}}
             </p>
             <p>
-                Descricao: {{this.transacao.descricao}}
+                Descrição: {{this.transacao.descricao}}
             </p>
             <p>
                 Valor: {{this.transacao.valor}}

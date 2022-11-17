@@ -4,10 +4,10 @@
             <summary>{{this.categoria.descricao}}</summary>
             <br>
             <p>
-                Codigo: {{this.categoria.codigo}}
+                Código: {{this.categoria.codigo}}
             </p>
             <p>
-                Descricao: {{this.categoria.descricao}}
+                Descrição: {{this.categoria.descricao}}
             </p>
             <p>
                 Tipo: {{this.categoria.tipo_categoria == 1 ? 'Renda' : 'Despesa'}}
