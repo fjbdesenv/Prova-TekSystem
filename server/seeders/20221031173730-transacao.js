@@ -3,10 +3,10 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('transacao', [
+    await queryInterface.bulkInsert('transacaos', [
       {
         valor: 1,
-        sitaucao: 'A',
+        situacao: 'A',
         date: Sequelize.fn("NOW"),
         descricao: "Descricao 1",
         categoria: 1,
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         valor: 2,
-        sitaucao: 'P',
+        situacao: 'P',
         date: Sequelize.fn("NOW"),
         descricao: "Descricao 2",
         categoria: 2,
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         valor: 3,
-        sitaucao: 'P',
+        situacao: 'P',
         date: Sequelize.fn("NOW"),
         descricao: "Descricao 3",
         categoria: 3,
@@ -41,6 +41,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('transacao', null, {});
+    await queryInterface.bulkDelete('transacaos', null, {});
   }
 };

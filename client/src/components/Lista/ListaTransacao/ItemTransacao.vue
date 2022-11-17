@@ -1,28 +1,30 @@
 <template>
     <b-list-group-item href="#" variant="light">
         <details>
-            <summary>{{this.transacao.decricao}}</summary>
+            <summary>{{this.transacao.descricao}}</summary>
             <br>
             <p>
                 Codigo: {{this.transacao.codigo}}
             </p>
             <p>
-                Descricao: {{this.transacao.valor}}
+                Descricao: {{this.transacao.descricao}}
             </p>
             <p>
-                Tipo: {{this.transacao.tipo_transacao}}
+                Valor: {{this.transacao.valor}}
+            </p>
+            <p>
+                Categoria: {{this.transacao.categoria}}
             </p>            
             <p>
                 Tipo: {{this.transacao.tipo_transacao}}
             </p>
-            <b-button class="btn btn-azul" @click="this.deleteTransacao" >Excluir</b-button>
-            <b-button class="btn btn-azul" >Editar</b-button>
+            <b-button class="btn btn-azul" @click="this.delete(this.transacao.codigo)" >Excluir</b-button>
+            <b-button class="btn btn-azul" @click="this.editar($event, (this.transacao.codigo))" >Editar</b-button>
         </details>
     </b-list-group-item>
 </template>
 
 <script>
-import consult from "@/utils/api/localhost";
 
 export default{
     name: 'ItemTransacao',
@@ -30,14 +32,14 @@ export default{
         transacao:{
             type: Object,
             requered: true
-        }
-    },
-    methods:{
-        deleteTransacao(){
-                consult.delete("/transacao/"+this.transacao.codigo).then(()=>{
-            }).catch((e) => {
-                console.error("Erro: ", e.message);
-            });
+        },
+        delete: {
+            type: Function,
+            requered: true
+        },
+        editar:{
+            type: Function,
+            requered: true
         }
     }
 }

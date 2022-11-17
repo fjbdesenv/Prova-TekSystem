@@ -1,18 +1,19 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('categorias', { 
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Categorias', {
       codigo: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       descricao: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      tipo_categria: {
+      tipo_categoria: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -25,11 +26,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn("NOW")
-      } 
+      }
     });
   },
-
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Categorias');
   }
 };

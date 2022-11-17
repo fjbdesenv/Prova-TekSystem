@@ -1,7 +1,7 @@
 <template>
     <b-list-group-item href="#" variant="light">
         <details>
-            <summary>{{this.categoria.decricao}}</summary>
+            <summary>{{this.categoria.descricao}}</summary>
             <br>
             <p>
                 Codigo: {{this.categoria.codigo}}
@@ -10,16 +10,15 @@
                 Descricao: {{this.categoria.descricao}}
             </p>
             <p>
-                Tipo: {{this.categoria.tipo_categoria}}
+                Tipo: {{this.categoria.tipo_categoria == 1 ? 'Renda' : 'Despesa'}}
             </p>            
-            <b-button class="btn btn-azul" @click="this.deleteCategoria" >Excluir</b-button>
-            <b-button class="btn btn-azul" >Editar</b-button>
+            <b-button class="btn btn-azul" @click="this.delete(this.categoria.codigo)" >Excluir</b-button>
+            <b-button class="btn btn-azul" @click="this.editar($event, (this.categoria.codigo))" >Editar</b-button>
         </details>
     </b-list-group-item>
 </template>
 
 <script>
-import consult from "@/utils/api/localhost";
 
 export default{
     name: 'ItemCategoria',
@@ -27,14 +26,14 @@ export default{
         categoria:{
             type: Object,
             requered: true
-        }
-    },
-    methods:{
-        deleteCategoria(){
-                consult.delete("/categoria/"+this.categoria.codigo).then(()=>{
-            }).catch((e) => {
-                console.error("Erro: ", e.message);
-            });
+        },
+        delete:{
+            type: Function,
+            requered: true
+        },
+        editar:{
+            type: Function,
+            requered: true
         }
     }
 }

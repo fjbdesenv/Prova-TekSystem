@@ -28,8 +28,8 @@ const CategoriaController = {
 
     post(req, res){
         try {
-            const {descricao, tipo_categria} = req.body;
-            Categoria.create({descricao, tipo_categria}).then(() => {
+            const {descricao, tipo_categoria} = req.body;
+            Categoria.create({descricao, tipo_categoria}).then(() => {
                 res.status(201).json({message: "Cadastrado com sucesso!"});
             }).catch((e) =>{
                 res.status(500).json({'error': e.message});                        
@@ -55,10 +55,10 @@ const CategoriaController = {
 
     put(req, res){
         try {
-            const {descricao, tipo_categria} = req.body;
+            const {descricao, tipo_categoria} = req.body;
 
             Categoria.update(
-                {descricao, tipo_categria},
+                {descricao, tipo_categoria},
                 {
                     where:{ codigo: req.params.id }
                 }

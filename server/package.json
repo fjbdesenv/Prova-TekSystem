@@ -1,13 +1,7 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "\"API para prova web\"",
-  "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./server.js"
+    "serve": "nodemon ./server.js"
   },
-  "author": "Fabio Junior Barbosa",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",

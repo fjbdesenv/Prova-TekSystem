@@ -28,8 +28,8 @@ const TransacaoController = {
 
     post(req, res){
         try {
-            const {email, senha, token} = req.body;
-            Transacao.create({email, senha, token}).then(() => {
+            const {valor, situacao, date, descricao, categoria, tipo_transacao} = req.body;
+            Transacao.create({valor, situacao, date, descricao, categoria, tipo_transacao}).then(() => {
                 res.status(201).json({message: "Cadastrado com sucesso!"});
             }).catch((e) =>{
                 res.status(500).json({'error': e.message});                        
@@ -55,10 +55,10 @@ const TransacaoController = {
 
     put(req, res){
         try {
-            const {email, senha, token} = req.body;
+            const {valor, situacao, date, descricao, categoria, tipo_transacao} = req.body;
 
             Transacao.update(
-                {email, senha, token},
+                {valor, situacao, date, descricao, categoria, tipo_transacao},
                 {
                     where:{ codigo: req.params.id }
                 }

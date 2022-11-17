@@ -1,4 +1,4 @@
-import Categoria from "@/views/CetogoriaView.vue";
+import Categoria from "@/views/CategoriaView.vue";
 
 export default {
   path: '/categoria',

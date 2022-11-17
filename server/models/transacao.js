@@ -10,25 +10,44 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Transacao.hasOne(models.Categoria ,{
+      Transacao.hasOne(models.Categoria,{
         foreignKey: 'codigo'
       });
     }
   }
   Transacao.init({
-    codigo: {
-      primaryKey: true,
-      type: DataTypes.INTEGER
+    codigo:{
+      type: DataTypes.INTEGER,
+      primaryKey: true 
     },
-    valor: DataTypes.FLOAT,
-    situacao: DataTypes.CHAR,
-    date: DataTypes.DATE,
-    descricao: DataTypes.STRING,
-    categoria: DataTypes.INTEGER,
-    tipo_transacao: DataTypes.INTEGER
+    valor: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    situacao: {
+      type: DataTypes.CHAR,
+      allowNull: false
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    descricao: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    categoria: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    tipo_transacao:{
+      type:  DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Transacao',
+    tableName: 'transacaos',
   });
   return Transacao;
 };
