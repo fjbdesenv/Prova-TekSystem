@@ -3,6 +3,7 @@
 ## Aplicação desenvolvida de acordo com alguns critérios pedidos na prova web, na empresa Tek-System Informática LTDA.
 
 ## 🔨 Funcionalidades do projeto
+
 - `Cadastro de Transações`: Posssibilita o cadastro de tranasções (operaçoes financeiras), podendo fazer o cadastro, edição, exclusão e consulta. 
 - `Cadastro de Categória`: Posssibilita o cadastro de categorias (classificação para trasação), podendo fazer o cadastro, edição, exclusão e consulta. 
 - `Consulta saldo no mês`: Possibilita a consulta (da totalização) de todas as operaçoes realizadas em um determinado mês (filtro).
@@ -10,16 +11,30 @@
 - `Consulta valor`: Possibilita a consulta entre um valor minimo e maximo para transação (filtro).
 
 ## 📁 Acesso ao projeto
+
 A codifição do projeto se encontra disponível em https://github.com/fjbdesenv/Prova-TekSystem.
 
-## 🛠️ Abrir e rodar o projeto
+## 🛠️ Projeto
 
-<!--[![Imagem do projeto](https://i.postimg.cc/bwT1zjyY/Music2.png)](https://postimg.cc/1888H2Vb)-->
+
+Imagem do projeto mostrando a tela de categoria onde podemos cadastrar, editar, excluir e visualizar as categorias já cadastradas.
+<p>
+  <img width="500px" heigth="500px" alt="Imagem do projeto" src="https://i.postimg.cc/ZqsWFJ0D/categoria.png"/>
+</p>
+
+Imagem do projeto capoturada apos exclusão de uma categoria.
+<p>
+  <img width="500px" heigth="500px" alt="Imagem do projeto" src="https://i.postimg.cc/rwFyhv66/categoria-exclus-o.png"/>
+</p>
 
 ### 🔧 Executar na sua máquina:
+
 ### Preparativos
+
 necessario instalar `git`, `node`, `MySql`:
-Executar o comando no terminal `git clone https://github.com/fjbdesenv/Prova-TekSystem.git`
+Executar o comando no terminal
+
+`git clone https://github.com/fjbdesenv/Prova-TekSystem.git`
 
 ### Instalação de BackEnd
 
@@ -37,6 +52,7 @@ Executar o comando no terminal `git clone https://github.com/fjbdesenv/Prova-Tek
 3. Acessar http://localhost:3000/ para vilualizar o projeto.
 
 ## 👀 Tecnologias utilizadas
+
 ![HTML](https://img.shields.io/badge/HTML-E34F26.svg?logo=html5&logoColor=white)
 ![css](https://img.shields.io/badge/CSS-1572B6.svg?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?logo=javascript&logoColor=black)
@@ -44,6 +60,7 @@ Executar o comando no terminal `git clone https://github.com/fjbdesenv/Prova-Tek
 ![Vue](https://img.shields.io/badge/vue-8B008B.svg?logo=vue.js&logoColor=black)
 
 ## ✏️ Autores
+
 | [<img src="https://avatars.githubusercontent.com/u/110018406?v=4" width=115><br><sub>Fábio Júnior Barbosa</sub>](https://github.com/fjbdesenv) |
 | :---: |
 
