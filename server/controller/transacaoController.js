@@ -65,6 +65,33 @@ const TransacaoController = {
             res.status(500).json({'error': e.message});
         }
     },
+    
+    getAnoMesValor(req, res){
+        try{
+
+            const ano = Number(req.params.ano);
+            const mes = Number(req.params.mes);
+            const min = Number(req.params.min);
+            const max = Number(req.params.max);
+
+            Transacao.findAll({
+                where:{
+                    date:{
+                        [Op.between]: [new Date(`01/${mes}/${ano}`), new Date(`${mes}/31/${ano}`)]
+                    },
+                    valor:{
+                        [Op.between]: [min, max]
+                    }
+                }
+            }).then((itens) => {
+                res.status(200).json(itens);
+            }).catch((e)=>{
+                res.status(500).json({'error': e.message});
+            })
+        }catch(e){
+            res.status(500).json({'error': e.message});
+        }
+    },
 
     post(req, res){
         try {
