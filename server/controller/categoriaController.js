@@ -29,8 +29,8 @@ const CategoriaController = {
     post(req, res){
         try {
             const {descricao, tipo_categoria} = req.body;
-            Categoria.create({descricao, tipo_categoria}).then(() => {
-                res.status(201).json({message: "Cadastrado com sucesso!"});
+            Categoria.create({descricao, tipo_categoria}).then((categoria) => {
+                res.status(201).json({message: "Cadastrado com sucesso!", categoria});
             }).catch((e) =>{
                 res.status(500).json({'error': e.message});                        
             });

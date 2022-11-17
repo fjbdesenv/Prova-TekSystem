@@ -29,8 +29,8 @@ const TransacaoController = {
     post(req, res){
         try {
             const {valor, situacao, date, descricao, categoria, tipo_transacao} = req.body;
-            Transacao.create({valor, situacao, date, descricao, categoria, tipo_transacao}).then(() => {
-                res.status(201).json({message: "Cadastrado com sucesso!"});
+            Transacao.create({valor, situacao, date, descricao, categoria, tipo_transacao}).then((transacao) => {
+                res.status(201).json({message: "Cadastrado com sucesso!", transacao});
             }).catch((e) =>{
                 res.status(500).json({'error': e.message});                        
             });
