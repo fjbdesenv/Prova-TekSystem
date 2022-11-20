@@ -22,9 +22,14 @@ Imagem do projeto mostrando a tela de categoria onde podemos cadastrar, editar, 
   <img width="500px" heigth="500px" alt="Imagem do projeto" src="https://i.postimg.cc/ZqsWFJ0D/categoria.png"/>
 </p>
 
-Imagem do projeto capoturada apos exclusão de uma categoria.
+Imagem do projeto capturada apos exclusão de uma categoria.
 <p>
   <img width="500px" heigth="500px" alt="Imagem do projeto" src="https://i.postimg.cc/rwFyhv66/categoria-exclus-o.png"/>
+</p>
+
+Imagem da tela inicial do projeto, ondem podemos filtras as transaçoes cadastradas.
+<p>
+  <img width="500px" heigth="500px" alt="Imagem do projeto" src="https://i.postimg.cc/g281Tdwr/Inicio.png"/>
 </p>
 
 ### 🔧 Executar na sua máquina:
