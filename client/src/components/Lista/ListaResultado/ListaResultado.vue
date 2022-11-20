@@ -1,21 +1,73 @@
 <template>
     <div class="conianer col flex">
-        <Table :lista="this.lista" />
+        <b-table striped hover :items="this.gerarLista" :fields="campos"></b-table>
     </div>
 </template>
 
 <script>
-import Table from './Table/Table.vue';
+import {mapGetters} from 'vuex'; 
+import mes from "@/utils/mes"
+
 export default {
-    name: 'ListaResultado',
-    props:{
-        lista:{
-            type: Array,
-            requerd: true
+    name: "Table",
+    data: () => {
+        return ({
+            campos: ["mes", "renda", "despesa", "total"],
+            itens: [],
+            total: {
+                mes: 'Total',
+                renda: 0.00,
+                despesa: 0.00,
+                total: 0.00                
+            }
+        });
+    },
+    computed:{
+        ...mapGetters(['listaAuxTransacao']),
+        gerarLista(){
+            this.atualizarItens();
+            return [...this.itens, this.total] ;
         }
     },
-    components:{
-        Table
+    methods:{
+        atualizarItens(){
+            this.apagarItens();
+            for (const item of this.listaAuxTransacao) {
+                const auxMes = mes[new Date(item.date).getMonth()+1];
+                const aux = {
+                    mes: auxMes,
+                    renda: item.tipo_transacao == 1 ? item.valor : 0.00,
+                    despesa: item.tipo_transacao == 2 ? item.valor : 0.00,
+                    total: item.tipo_transacao == 1 ? item.valor : -item.valor  
+                }
+
+                this.itens.push(aux);
+                this.atualizarTotal(aux);         
+            }
+        },
+        atualizarTotal(item){
+            this.total.renda += item.renda;
+            this.total.despesa += item.despesa;
+            this.total.total += item.total;
+        },
+        apagarItens(){
+            this.itens = [];
+            this.total = {
+                mes: 'Total',
+                renda: 0.00,
+                despesa: 0.00,
+                total: 0.00                
+            }
+        }
     }
 }
 </script>
+
+<style lang="scss">
+    table{
+        margin-top: 1rem;
+        thead{      
+            background-color: rgba(200, 0, 0, 0.6);
+        }
+    }
+</style>

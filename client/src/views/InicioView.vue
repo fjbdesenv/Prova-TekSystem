@@ -3,8 +3,8 @@
     <Titulo titulo="Finanças"/>
   </div>
   <div class="container flex col">
-    <Filtro @resultado="this.setLista($event)"></Filtro>
-    <ListaResultado :lista="this.listaTransacao" ></ListaResultado>
+    <Filtro />
+    <ListaResultado />
   </div>
 </template>
 

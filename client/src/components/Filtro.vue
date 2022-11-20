@@ -87,7 +87,6 @@ export default {
             }
             
             consult.get(aux.consult).then((itens) => {
-                this.$emit('resultado', itens.data);
                 this.atualizarListaAuxTransacao(itens.data);
             }).catch((e) => {
                 console.error("Erro : ", e.message);
