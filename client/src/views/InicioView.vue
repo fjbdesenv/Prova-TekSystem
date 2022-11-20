@@ -3,8 +3,8 @@
     <Titulo titulo="Finanças"/>
   </div>
   <div class="container flex col">
-    <Filtro></Filtro>
-    <ListaResultado></ListaResultado>
+    <Filtro @resultado="this.setLista($event)"></Filtro>
+    <ListaResultado :lista="this.listaTransacao" ></ListaResultado>
   </div>
 </template>
 
@@ -15,10 +15,20 @@ import ListaResultado from "@/components/Lista/ListaResultado/ListaResultado.vue
 
 export default {
   name: 'HomeView',
+  data: () => {
+    return({
+      listaTransacao: []
+    });
+  },
   components:{
     Titulo,
     Filtro,
     ListaResultado
+  },
+  methods:{
+    setLista(lista){
+      this.listaTransacao = lista;
+    }
   }
 };
 </script>

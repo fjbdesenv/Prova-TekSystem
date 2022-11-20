@@ -5,7 +5,7 @@
     <b-alert show variant="danger" v-if="mgs.erro" >Não é possivel excluir essa categoria!</b-alert>
     
     <b-list-group v-for="(categoria, index) in this.listaCategoria">
-      <ItemCategoria :categoria="categoria" :delete="apagar" :editar="editar" />
+      <ItemCategoria :categoria="categoria" :delete="apagar" :editar="editar"/>
     </b-list-group>
 
 </template>

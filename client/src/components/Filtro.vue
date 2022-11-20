@@ -17,12 +17,14 @@
             <b-form-input v-model="valor.max"  name="max"></b-form-input>
         </div>
         <div class="m-10">
-            <b-button class="btn btn-azul m-15" @click="" >Filtrar</b-button>
+            <b-button class="btn btn-azul m-15" @click="this.filtrar" >Filtrar</b-button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import consult from "@/utils/api/localhost";
 
 export default {
     name: 'Filtro',
@@ -66,6 +68,31 @@ export default {
                 max: 9999999
             }
         });
+    },
+    methods:{
+        ...mapMutations(['atualizarListaAuxTransacao']),
+        filtrar(){   
+            const aux = { 
+                ano: this.ano.options[this.ano.value].text,
+                mes: this.mes.value,
+                min: this.valor.min,
+                max: this.valor.max,
+                consult: ''
+            };
+
+            if(aux.mes == 0){
+                aux.consult = `transacao/ano/${aux.ano}/min/${aux.min}/max/${aux.max}`
+            }else if(aux.mes > 0 && aux.mes < 13){
+                aux.consult = `transacao/ano/${aux.ano}/mes/${aux.mes}/min/${aux.min}/max/${aux.max}`
+            }
+            
+            consult.get(aux.consult).then((itens) => {
+                this.$emit('resultado', itens.data);
+                this.atualizarListaAuxTransacao(itens.data);
+            }).catch((e) => {
+                console.error("Erro : ", e.message);
+            });
+        }
     }
 }
 </script>

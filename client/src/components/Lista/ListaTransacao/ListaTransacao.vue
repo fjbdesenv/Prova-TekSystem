@@ -5,7 +5,7 @@
     <b-alert show variant="danger" v-if="this.mgs.erro" >Não é possivel excluir essa transação!</b-alert>
     
     <b-list-group v-for="(transacao, index) in this.listaTransacao">
-      <ItemTransacao :transacao="transacao" :delete="apagar" :editar="editar"  />
+      <ItemTransacao :transacao="transacao" :delete="apagar" :editar="editar"/>
     </b-list-group>
 
 </template>
