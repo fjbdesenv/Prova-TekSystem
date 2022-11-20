@@ -1,5 +1,4 @@
 export default [
-    'Todos',
     'Janeiro',
     'Fevereiro',
     'Março',
@@ -11,5 +10,6 @@ export default [
     'Setembro',
     'Outubro', 
     'Novembro', 
-    'Dezembro'
+    'Dezembro',
+    'Todos'
 ]

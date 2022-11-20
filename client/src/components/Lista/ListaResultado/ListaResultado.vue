@@ -13,12 +13,8 @@ export default {
     data: () => {
         return ({
             campos: ["mes", "renda", "despesa", "total"],
-            itens: [],
-            total: {
-                mes: 'Total',
-                renda: 0.00,
-                despesa: 0.00,
-                total: 0.00                
+            itens: {
+                meses: undefined
             }
         });
     },
@@ -26,38 +22,61 @@ export default {
         ...mapGetters(['listaAuxTransacao']),
         gerarLista(){
             this.atualizarItens();
-            return [...this.itens, this.total] ;
+            return this.itens.meses.filter((item) => item !== undefined);
         }
     },
     methods:{
         atualizarItens(){
             this.apagarItens();
             for (const item of this.listaAuxTransacao) {
-                const auxMes = mes[new Date(item.date).getMonth()+1];
+                const indexMes = Number(new Date(item.date).getMonth());
                 const aux = {
-                    mes: auxMes,
+                    mes: mes[indexMes],
                     renda: item.tipo_transacao == 1 ? item.valor : 0.00,
                     despesa: item.tipo_transacao == 2 ? item.valor : 0.00,
                     total: item.tipo_transacao == 1 ? item.valor : -item.valor  
                 }
+                
+                if(this.itens.meses[indexMes] === undefined){
+                    this.itens.meses[indexMes] = aux;
+                }else{
+                    console.log("Else inicio", this.itens.meses[indexMes], aux);
+                    this.itens.meses[indexMes].renda += aux.renda;
+                    this.itens.meses[indexMes].despesa += aux.despesa;
+                    this.itens.meses[indexMes].total += aux.total;
+                    console.log("Else fim", this.itens.meses[indexMes]);
+                } 
 
-                this.itens.push(aux);
                 this.atualizarTotal(aux);         
             }
         },
         atualizarTotal(item){
-            this.total.renda += item.renda;
-            this.total.despesa += item.despesa;
-            this.total.total += item.total;
+            const total = this.itens.meses[12];
+            total.renda += item.renda;
+            total.despesa += item.despesa;
+            total.total += item.total;
         },
         apagarItens(){
-            this.itens = [];
-            this.total = {
-                mes: 'Total',
-                renda: 0.00,
-                despesa: 0.00,
-                total: 0.00                
-            }
+            this.itens.meses = [
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                    mes: 'Total',
+                    renda: 0.00,
+                    despesa: 0.00,
+                    total: 0.00                
+                }
+            ];
         }
     }
 }
