@@ -19,6 +19,10 @@
             
             <b-button class="btn btn-azul" @click="voltar"> Voltar </b-button>
         </div>
+        
+        <b-alert show variant="danger" v-if="erro.cadastrar" >Não foi possivel cadastrar, verifique os campos!</b-alert>
+        <b-alert show variant="danger" v-if="erro.editar" >Não foi possivel editar, verifique os campos!</b-alert>
+        
     </div>
 </template>
 
@@ -38,7 +42,11 @@ export default{
                     {value: 2, text: 'Despesa'}
                 ] 
             },
-            showEditar: false
+            showEditar: false,
+            erro: {
+                cadastrar: false,
+                editar: false
+            }
         });
     },
     props:{
@@ -52,26 +60,41 @@ export default{
             'atualizarOpCategoria'
         ]),
         cadastrar(){
-            consult.post("categoria", {
-                'descricao': this.descricao,
-                'tipo_categoria': this.tipo.value,
-            }).then((response)=>{
-                this.atualizarOpCategoria({ value:  false, codigo: -1});
-            }).catch(()=>{
-                alert("Erro ao cadastrar");
-                console.error("Erro: ", e.message);
-            });
+            if(this.verificarCampos()){
+                consult.post("categoria", {
+                    'descricao': this.descricao,
+                    'tipo_categoria': this.tipo.value,
+                }).then((response)=>{
+                    this.atualizarOpCategoria({ value:  false, codigo: -1});
+                }).catch(()=>{
+                    alert("Erro ao cadastrar");
+                    console.error("Erro: ", e.message);
+                });
+            }else{
+                this.erro.cadastrar = true;
+                setTimeout(()=>{
+                    this.erro.cadastrar = false;
+                }, 2000)
+            }
+
         },
         editar(){
-            consult.put("categoria/" + this.codigo, {
-                'descricao': this.descricao,
-                'tipo_categoria': this.tipo.value
-            }).then((response)=>{
-                this.atualizarOpCategoria({ value:  false, codigo: -1});
-            }).catch(()=>{
-                alert("Erro ao cadastrar!");
-                console.error("Erro: ", e.message);
-            });
+            if (this.verificarCampos()){
+                consult.put("categoria/" + this.codigo, {
+                    'descricao': this.descricao,
+                    'tipo_categoria': this.tipo.value
+                }).then((response)=>{
+                    this.atualizarOpCategoria({ value:  false, codigo: -1});
+                }).catch(()=>{
+                    alert("Erro ao cadastrar!");
+                    console.error("Erro: ", e.message);
+                });
+            }else{
+                this.erro.editar = true;
+                setTimeout(()=>{
+                    this.erro.editar = false;
+                }, 2000)
+            }
         },
         consultar(){
             consult.get("categoria/" + this.codigo).then((response)=>{
@@ -81,6 +104,9 @@ export default{
                 alert("Erro ao editar!");
                 console.error("Erro: ", e.message);
             });
+        },
+        verificarCampos(){
+            return this.descricao != ''
         },
         voltar(){
             this.atualizarOpCategoria({ value:  false, codigo: -1});

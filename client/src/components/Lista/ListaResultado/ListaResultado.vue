@@ -40,11 +40,9 @@ export default {
                 if(this.itens.meses[indexMes] === undefined){
                     this.itens.meses[indexMes] = aux;
                 }else{
-                    console.log("Else inicio", this.itens.meses[indexMes], aux);
                     this.itens.meses[indexMes].renda += aux.renda;
                     this.itens.meses[indexMes].despesa += aux.despesa;
                     this.itens.meses[indexMes].total += aux.total;
-                    console.log("Else fim", this.itens.meses[indexMes]);
                 } 
 
                 this.atualizarTotal(aux);         

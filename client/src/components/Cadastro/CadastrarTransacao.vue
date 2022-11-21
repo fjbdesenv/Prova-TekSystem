@@ -35,6 +35,10 @@
             
             <b-button class="btn btn-azul" @click="voltar"> Voltar </b-button>
         </div>
+
+        <b-alert show variant="danger" v-if="erro.cadastrar" >Não foi possivel cadastrar, verifique os campos!</b-alert>
+        <b-alert show variant="danger" v-if="erro.editar" >Não foi possivel editar, verifique os campos!</b-alert>
+
     </div>
 </template>
 
@@ -68,7 +72,11 @@ export default{
                 ] 
             },
             date: Date(),
-            showEditar: false
+            showEditar: false,
+            erro:{
+                cadastrar: false,
+                editar: false
+            }
         });
     },
     props:{
@@ -82,34 +90,48 @@ export default{
             'atualizarOpTransacao'
         ]),
         cadastrar(){
-            consult.post("transacao", {
-                'valor': this.valor,
-                'descricao': this.descricao,
-                'situacao': this.situacao.value,
-                'categoria': this.categoria.value,
-                'tipo_transacao': this.tipo.value,
-                'date': this.date,
-            }).then((response)=>{
-                this.atualizarOpTransacao({ value:  false, codigo: -1});
-            }).catch(()=>{
-                alert("Erro ao cadastrar");
-                console.error("Erro: ", e.message);
-            });
+            if(this.verificarCampos()){
+                consult.post("transacao", {
+                    'valor': this.valor,
+                    'descricao': this.descricao,
+                    'situacao': this.situacao.value,
+                    'categoria': this.categoria.value,
+                    'tipo_transacao': this.tipo.value,
+                    'date': this.date,
+                }).then((response)=>{
+                    this.atualizarOpTransacao({ value:  false, codigo: -1});
+                }).catch(()=>{
+                    alert("Erro ao cadastrar");
+                    console.error("Erro: ", e.message);
+                });
+            }else{
+                this.erro.cadastrar = true;
+                setTimeout(()=>{
+                    this.erro.cadastrar = false;
+                }, 2000);
+            }
         },
         editar(){
-            consult.put("transacao/" + this.codigo, {
-                'valor': this.valor,
-                'descricao': this.descricao,
-                'situacao': this.situacao.value,
-                'categoria': this.categoria.value,
-                'tipo_transacao': this.tipo.value,
-                'date': this.date,
-            }).then((response)=>{
-                this.atualizarOpTransacao({ value:  false, codigo: -1});
-            }).catch(()=>{
-                alert("Erro ao cadastrar!");
-                console.error("Erro: ", e.message);
-            });
+            if(this.verificarCampos()){
+                consult.put("transacao/" + this.codigo, {
+                    'valor': this.valor,
+                    'descricao': this.descricao,
+                    'situacao': this.situacao.value,
+                    'categoria': this.categoria.value,
+                    'tipo_transacao': this.tipo.value,
+                    'date': this.date,
+                }).then((response)=>{
+                    this.atualizarOpTransacao({ value:  false, codigo: -1});
+                }).catch(()=>{
+                    alert("Erro ao cadastrar!");
+                    console.error("Erro: ", e.message);
+                });
+            }else{
+                this.erro.editar = true;
+                setTimeout(()=>{
+                    this.erro.editar = false;
+                }, 2000);
+            }
         },
         consultar(){
             consult.get("transacao/" + this.codigo).then((response)=>{
@@ -138,6 +160,9 @@ export default{
                 alert("Erro ao editar!");
                 console.error("Erro: ", e.message);
             });
+        },
+        verificarCampos(){
+            return this.descricao != '' && this.valor != 0 && this.categoria.value != 0;
         },
         voltar(){
             this.atualizarOpTransacao({ value:  false, codigo: -1});
